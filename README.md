@@ -1,5 +1,5 @@
 # TT
-[DEMO LINK](https://DarinaSavytska.github.io/dashboard-application/)
+[DEMO LINK](https://DarinaSavytska.github.io/leagueInfo/)
 
 [Test Task](https://drive.google.com/file/d/1G8kvkmd44MmAXTXm7uWIX0Znyl1Sqhof/view?usp=sharing)
 
