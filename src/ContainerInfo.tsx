@@ -1,19 +1,10 @@
 import React, { useState } from 'react';
-// import { getPokemonByNumber } from './api/api';
-
-async function getPokemonByNumber(id: number) {
-  const pokeAPI = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`).then(
-    res => res.json()
-  );
-
-  return pokeAPI;
-}
+import { getPokemonByNumber } from './api';
 
 export const ContainerInfo: React.FC = () => {
   const [hpState, setHpState] = useState<number>(0);
   const [attackState, setAttackState] = useState<number>(0);
   const [result, setResult] = useState<number>();
-  // const result: number = Number(hpState + atacState);
   const [isResultReady, setIsResultReady] = useState<boolean>(false);
 
   const [pokeNumber, setPokeNumber] = useState<number>(1);
@@ -21,36 +12,36 @@ export const ContainerInfo: React.FC = () => {
   const [pokeName, setPokeName] = useState<string>();
   const [pokeNum, setPokeNum] = useState<number>();
 
+  const [pokemon, setPokemon] = useState<any>(null);
+
+
+
+
   const getPokemon = async (number: number) => {
-    const pokemon = await getPokemonByNumber(number);
+    const pokemonFromAPI = await getPokemonByNumber(number);
 
-    setPokeName(pokemon.forms[0].name);
-    setPokeNum(pokemon.id);
+    setPokeName(pokemonFromAPI.forms[0].name);
+    setPokeNum(pokemonFromAPI.id);
+    setPokemon(pokemonFromAPI);
 
-    console.log(pokemon);
+    console.log(pokemonFromAPI);
   };
 
-  const onChangeHP = e => {
+  const onChangeHP = (e: any) => {
     setHpState(e.target.value);
   };
 
-  const onChangeAttack = e => {
+  const onChangeAttack = (e: any) => {
     setAttackState(e.target.value);
   };
 
-  const onChangePkeNumber = e => {
+  const onChangePkeNumber = (e: any) => {
     setPokeNumber(e.target.value);
   };
 
-  // console.log('pokeName', pokeName);
-
-  // const api = `https://pokeapi.co/api/v2/pokemon/${pokeNumber}`;
-
-  // console.log(api);
-
   return (
     <div>
-      <p>Test info. Don't work with neofits</p>
+      <p>Test info. Don't work with Neophytes</p>
       <div>
         <div>
           <p>HP</p>
@@ -95,6 +86,13 @@ export const ContainerInfo: React.FC = () => {
           {pokeName ? `Pokemon #${pokeNum} is ${pokeName}` : 'Choose pokemon'}
         </p>
       </div>
+
+      {pokemon && (
+        <img alt='Pokemon sprite' src={pokemon.sprites.front_default} />
+      )}
+      {pokemon?.sprites?.front_female && (
+        <img alt='Pokemon sprite' src={pokemon.sprites.front_female} />
+      )}
 
       <button
         style={{ margin: '20px' }}
