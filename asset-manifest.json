@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.js": "/leagueInfo/static/js/main.12fdfc1a.js",
+    "main.js": "/leagueInfo/static/js/main.c93e2e3b.js",
     "index.html": "/leagueInfo/index.html",
-    "main.12fdfc1a.js.map": "/leagueInfo/static/js/main.12fdfc1a.js.map"
+    "main.c93e2e3b.js.map": "/leagueInfo/static/js/main.c93e2e3b.js.map"
   },
   "entrypoints": [
-    "static/js/main.12fdfc1a.js"
+    "static/js/main.c93e2e3b.js"
   ]
 }
