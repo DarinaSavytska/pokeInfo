@@ -5,11 +5,6 @@ export const ContainerInfo: React.FC = () => {
   const [pokeNumberForSearch, setPokeNumberForSearch] = useState<number>(1);
   const [pokemon, setPokemon] = useState<any>(null);
 
-  const [hpState, setHpState] = useState<number>(0);
-  const [attackState, setAttackState] = useState<number>(0);
-  const [result, setResult] = useState<number>();
-  const [isResultReady, setIsResultReady] = useState<boolean>(false);
-
   const [pokeName, setPokeName] = useState<string>();
   const [pokeNum, setPokeNum] = useState<number>();
 
@@ -137,45 +132,91 @@ export const ContainerInfo: React.FC = () => {
                 Number(genecodeOfPokemon?.split('sd')[1].split('.')[0]) || 0
               }`}</p>
             </div>
-          </div>
 
-          {/* <div>
-            <div>
-              <p>HP</p>
-              <input
-                name='hpState'
-                type='number'
-                min={0}
-                step={1}
-                value={hpState}
-                onChange={onChangeHP}
-              />
+            <div style={{ width: '100px' }}>
+              <p>EV</p>
+              <div
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '13px',
+                }}
+              >
+                <p
+                  style={{
+                    display: 'flex',
+                    margin: '0',
+                    gap: '10px',
+                    justifyContent: 'space-between',
+                    width: '100px',
+                  }}
+                >
+                  hp
+                  <input style={{ width: '50px' }} />
+                </p>
+                <p
+                  style={{
+                    display: 'flex',
+                    margin: '0',
+                    gap: '10px',
+                    justifyContent: 'space-between',
+                    width: '100px',
+                  }}
+                >
+                  a
+                  <input style={{ width: '50px' }} />
+                </p>
+                <p
+                  style={{
+                    display: 'flex',
+                    margin: '0',
+                    gap: '10px',
+                    justifyContent: 'space-between',
+                    width: '100px',
+                  }}
+                >
+                  d
+                  <input style={{ width: '50px' }} />
+                </p>
+                <p
+                  style={{
+                    display: 'flex',
+                    margin: '0',
+                    gap: '10px',
+                    justifyContent: 'space-between',
+                    width: '100px',
+                  }}
+                >
+                  s
+                  <input style={{ width: '50px' }} />
+                </p>
+                <p
+                  style={{
+                    display: 'flex',
+                    margin: '0',
+                    gap: '10px',
+                    justifyContent: 'space-between',
+                    width: '100px',
+                  }}
+                >
+                  sa
+                  <input style={{ width: '50px' }} />
+                </p>
+                <p
+                  style={{
+                    display: 'flex',
+                    margin: '0',
+                    gap: '10px',
+                    justifyContent: 'space-between',
+                    width: '100px',
+                  }}
+                >
+                  sd
+                  <input style={{ width: '50px' }} />
+                </p>
+              </div>
             </div>
-            <div>
-              <p>Attack</p>
-              <input
-                name='attackState'
-                type='number'
-                min={0}
-                step={1}
-                value={attackState}
-                onChange={onChangeAttack}
-              />
-            </div>
           </div>
-
-          <button
-            style={{ margin: '20px' }}
-            type='button'
-            onClick={() => {
-              setResult(Number(hpState) + Number(attackState));
-              setIsResultReady(true);
-            }}
-          >
-            Result
-          </button>
-
-          <p>{isResultReady && `Result is ${result}`}</p> */}
 
           <div
             style={{
@@ -187,16 +228,24 @@ export const ContainerInfo: React.FC = () => {
           >
             <p>Enter genecode</p>
             <input
+              style={{ width: '180px' }}
               name='pokeGenecode'
               type='string'
               value={tempGenecodeOfPokemon}
               onChange={onCountGenecode}
+              placeholder='h26a27d24s31sa27sd27.100'
             />
             <button
               type='button'
-              onClick={() => setGenecodeOfPokemon(tempGenecodeOfPokemon)}
+              onClick={() => tempGenecodeOfPokemon && setGenecodeOfPokemon(tempGenecodeOfPokemon)}
             >
               Enter
+            </button>
+            <button
+              type='button'
+              onClick={() => setGenecodeOfPokemon('h0a0d0s0sa0sd0')}
+            >
+              Clear
             </button>
           </div>
         </>
