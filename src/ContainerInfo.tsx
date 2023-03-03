@@ -37,6 +37,32 @@ export const ContainerInfo: React.FC = () => {
     setPokeNumberForSearch(e.target.value);
   };
 
+  const [evHP, setEvHP] = useState<number>(0);
+  const [evA, setEvA] = useState<number>(0);
+  const [evD, setEvD] = useState<number>(0);
+  const [evS, setEvS] = useState<number>(0);
+  const [evSa, setEvSa] = useState<number>(0);
+  const [evSd, setEvSd] = useState<number>(0);
+
+  const onEvChange = (gen: string, e: any) => {
+    const ev = () => {
+      if (e.target.value > 126) {
+        return 126;
+      } else if (e.target.value === 0) {
+        return null;
+      } else {
+        return e.target.value;
+      }
+    };
+
+    gen === 'hp' && setEvHP(ev());
+    gen === 'a' && setEvA(ev());
+    gen === 'd' && setEvD(ev());
+    gen === 's' && setEvS(ev());
+    gen === 'sa' && setEvSa(ev());
+    gen === 'sd' && setEvSd(ev());
+  };
+
   return (
     <div>
       <p>Test info. Don't work with Neophytes</p>
@@ -56,7 +82,10 @@ export const ContainerInfo: React.FC = () => {
               max={1008}
               step={1}
             />
-            <button onClick={() => getPokemon(pokeNumberForSearch)}>
+            <button
+              onClick={() => getPokemon(pokeNumberForSearch)}
+              type='submit'
+            >
               Load pokemon
             </button>
           </div>
@@ -152,7 +181,12 @@ export const ContainerInfo: React.FC = () => {
                   }}
                 >
                   hp
-                  <input style={{ width: '50px' }} />
+                  <input
+                    style={{ width: '50px' }}
+                    type='number'
+                    onChange={e => onEvChange('hp', e)}
+                    value={evHP}
+                  />
                 </p>
                 <p
                   style={{
@@ -164,7 +198,12 @@ export const ContainerInfo: React.FC = () => {
                   }}
                 >
                   a
-                  <input style={{ width: '50px' }} />
+                  <input
+                    style={{ width: '50px' }}
+                    type='number'
+                    onChange={e => onEvChange('a', e)}
+                    value={evA}
+                  />
                 </p>
                 <p
                   style={{
@@ -176,7 +215,12 @@ export const ContainerInfo: React.FC = () => {
                   }}
                 >
                   d
-                  <input style={{ width: '50px' }} />
+                  <input
+                    style={{ width: '50px' }}
+                    type='number'
+                    onChange={e => onEvChange('d', e)}
+                    value={evD}
+                  />
                 </p>
                 <p
                   style={{
@@ -188,7 +232,12 @@ export const ContainerInfo: React.FC = () => {
                   }}
                 >
                   s
-                  <input style={{ width: '50px' }} />
+                  <input
+                    style={{ width: '50px' }}
+                    type='number'
+                    onChange={e => onEvChange('s', e)}
+                    value={evS}
+                  />
                 </p>
                 <p
                   style={{
@@ -200,7 +249,12 @@ export const ContainerInfo: React.FC = () => {
                   }}
                 >
                   sa
-                  <input style={{ width: '50px' }} />
+                  <input
+                    style={{ width: '50px' }}
+                    type='number'
+                    onChange={e => onEvChange('sa', e)}
+                    value={evSa}
+                  />
                 </p>
                 <p
                   style={{
@@ -212,7 +266,12 @@ export const ContainerInfo: React.FC = () => {
                   }}
                 >
                   sd
-                  <input style={{ width: '50px' }} />
+                  <input
+                    style={{ width: '50px' }}
+                    type='number'
+                    onChange={e => onEvChange('sd', e)}
+                    value={evSd}
+                  />
                 </p>
               </div>
             </div>
@@ -233,19 +292,30 @@ export const ContainerInfo: React.FC = () => {
               type='string'
               value={tempGenecodeOfPokemon}
               onChange={onCountGenecode}
-              placeholder='h26a27d24s31sa27sd27.100'
+              placeholder='h0a0d0s0sa0sd0.100'
             />
             <button
               type='button'
-              onClick={() => tempGenecodeOfPokemon && setGenecodeOfPokemon(tempGenecodeOfPokemon)}
+              onClick={() =>
+                tempGenecodeOfPokemon &&
+                setGenecodeOfPokemon(tempGenecodeOfPokemon)
+              }
             >
               Enter
             </button>
             <button
               type='button'
-              onClick={() => setGenecodeOfPokemon('h0a0d0s0sa0sd0')}
+              onClick={() => {
+                setGenecodeOfPokemon('h0a0d0s0sa0sd0');
+                setEvHP(0);
+                setEvA(0);
+                setEvD(0);
+                setEvS(0);
+                setEvSa(0);
+                setEvSd(0);
+              }}
             >
-              Clear
+              Clear All Stats
             </button>
           </div>
         </>
