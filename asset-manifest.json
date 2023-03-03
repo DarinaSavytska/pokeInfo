@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.js": "/google-books/static/js/main.aa651fc7.js",
-    "index.html": "/google-books/index.html",
-    "main.aa651fc7.js.map": "/google-books/static/js/main.aa651fc7.js.map"
+    "main.js": "/leagueInfo/static/js/main.12fdfc1a.js",
+    "index.html": "/leagueInfo/index.html",
+    "main.12fdfc1a.js.map": "/leagueInfo/static/js/main.12fdfc1a.js.map"
   },
   "entrypoints": [
-    "static/js/main.aa651fc7.js"
+    "static/js/main.12fdfc1a.js"
   ]
 }
