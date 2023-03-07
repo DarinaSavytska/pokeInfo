@@ -21,20 +21,38 @@ export const ContainerInfo: React.FC = () => {
     console.log(pokemonFromAPI);
   };
 
+  const [isGenCorrect, setIsGenCorrect] = useState<boolean>(true);
+
   const onCountGenecode = (e: any) => {
-    setTempGenecodeOfPokemon(e.target.value);
+    if (
+      !e.target.value.includes('h') &&
+      !e.target.value.includes('a') &&
+      !e.target.value.includes('d') &&
+      !e.target.value.includes('s') &&
+      !e.target.value.includes('sa') &&
+      !e.target.value.includes('sd')
+    ) {
+      setIsGenCorrect(false);
+    } else {
+      setIsGenCorrect(true);
+    }
+    isGenCorrect && setTempGenecodeOfPokemon(e.target.value);
   };
 
-  // const onChangeHP = (e: any) => {
-  //   setHpState(e.target.value);
-  // };
-
-  // const onChangeAttack = (e: any) => {
-  //   setAttackState(e.target.value);
-  // };
+  /// обрезать нули в начале
 
   const onChangePokeNumber = (e: any) => {
-    setPokeNumberForSearch(e.target.value);
+    const num = () => {
+      if (e.target.value > 1008) {
+        return 1008;
+      } else if (e.target.value < 0) {
+        return 0;
+      } else {
+        return e.target.value;
+      }
+    };
+
+    setPokeNumberForSearch(num());
   };
 
   const [evHP, setEvHP] = useState<number>(0);
@@ -48,8 +66,8 @@ export const ContainerInfo: React.FC = () => {
     const ev = () => {
       if (e.target.value > 126) {
         return 126;
-      } else if (e.target.value === 0) {
-        return null;
+      } else if (e.target.value < 0) {
+        return 0;
       } else {
         return e.target.value;
       }
@@ -294,6 +312,7 @@ export const ContainerInfo: React.FC = () => {
               onChange={onCountGenecode}
               placeholder='h0a0d0s0sa0sd0.100'
             />
+            {!isGenCorrect && <p>Enter correct gen</p>}
             <button
               type='button'
               onClick={() =>
