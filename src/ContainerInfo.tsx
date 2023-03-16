@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { getPokemonByNumber } from './api';
 
 export const ContainerInfo: React.FC = () => {
@@ -62,6 +62,16 @@ export const ContainerInfo: React.FC = () => {
   const [evSa, setEvSa] = useState<number>(0);
   const [evSd, setEvSd] = useState<number>(0);
 
+  const [pokeLevel, setPokeLevel] = useState<number>(1);
+
+  const onLevelChange = (e: any) => {
+    if (e.target.value > 100) {
+      return setPokeLevel(100);
+    } else {
+      return setPokeLevel(e.target.value);
+    }
+  };
+
   const onEvChange = (gen: string, e: any) => {
     const ev = () => {
       if (e.target.value > 126) {
@@ -79,6 +89,43 @@ export const ContainerInfo: React.FC = () => {
     gen === 's' && setEvS(ev());
     gen === 'sa' && setEvSa(ev());
     gen === 'sd' && setEvSd(ev());
+  };
+
+  const [hpStatResult, seHpStatResult] = useState<number>(0);
+  const [aStatResult, seAStatResult] = useState<number>(0);
+  const [dStatResult, seDStatResult] = useState<number>(0);
+  const [sStatResult, seSStatResult] = useState<number>(0);
+  const [saStatResult, seSaStatResult] = useState<number>(0);
+  const [sdStatResult, seSdStatResult] = useState<number>(0);
+
+  const genHP = Number(genecodeOfPokemon?.split('h')[1].split('a')[0]) || 0;
+  const genA = Number(genecodeOfPokemon?.split('a')[1].split('d')[0]) || 0;
+  const genD = Number(genecodeOfPokemon?.split('d')[1].split('s')[0]) || 0;
+  const genS = Number(genecodeOfPokemon?.split('s')[1].split('sa')[0]) || 0;
+  const genSA = Number(genecodeOfPokemon?.split('sa')[1].split('sd')[0]) || 0;
+  const genSD = Number(genecodeOfPokemon?.split('sd')[1].split('.')[0]) || 0;
+
+  const char = 1; // добавить функционал для трень и хара
+  const train = 1; // добавить функционал для трень и хара
+
+  const countResultStats = () => {
+    const hpStat =
+      (pokemon.stats[0].base_stat * 2 + genHP + evHP / 2) * (pokeLevel / 100) +
+      10 +
+      Number(pokeLevel);
+
+    const aStat = ((pokemon.stats[1].base_stat * 2 + genA + evA / 2) * pokeLevel / 100 + 5) * char * train; 
+    const dStat = ((pokemon.stats[2].base_stat * 2 + genD + evD / 2) * pokeLevel / 100 + 5) * char * train; 
+    const sStat = ((pokemon.stats[5].base_stat * 2 + genS + evS / 2) * pokeLevel / 100 + 5) * char * train; 
+    const saStat = ((pokemon.stats[3].base_stat * 2 + genSA + evSa / 2) * pokeLevel / 100 + 5) * char * train; 
+    const sdStat = ((pokemon.stats[4].base_stat * 2 + genSD + evSd / 2) * pokeLevel / 100 + 5) * char * train; 
+
+    seHpStatResult(Math.round(hpStat));
+    seAStatResult(Math.round(aStat));
+    seDStatResult(Math.round(dStat));
+    seSStatResult(Math.round(sStat));
+    seSaStatResult(Math.round(saStat));
+    seSdStatResult(Math.round(sdStat));
   };
 
   return (
@@ -158,26 +205,12 @@ export const ContainerInfo: React.FC = () => {
 
             <div>
               <p>Genecode</p>
-              <p>
-                {`hp - ${
-                  Number(genecodeOfPokemon?.split('h')[1].split('a')[0]) || 0
-                }`}
-              </p>
-              <p>{`a - ${
-                Number(genecodeOfPokemon?.split('a')[1].split('d')[0]) || 0
-              }`}</p>
-              <p>{`d - ${
-                Number(genecodeOfPokemon?.split('d')[1].split('s')[0]) || 0
-              }`}</p>
-              <p>{`s - ${
-                Number(genecodeOfPokemon?.split('s')[1].split('sa')[0]) || 0
-              }`}</p>
-              <p>{`sa - ${
-                Number(genecodeOfPokemon?.split('sa')[1].split('sd')[0]) || 0
-              }`}</p>
-              <p>{`sd - ${
-                Number(genecodeOfPokemon?.split('sd')[1].split('.')[0]) || 0
-              }`}</p>
+              <p>{`hp - ${genHP}`}</p>
+              <p>{`a - ${genA}`}</p>
+              <p>{`d - ${genD}`}</p>
+              <p>{`s - ${genS}`}</p>
+              <p>{`sa - ${genSA}`}</p>
+              <p>{`sd - ${genSD}`}</p>
             </div>
 
             <div style={{ width: '100px' }}>
@@ -293,6 +326,43 @@ export const ContainerInfo: React.FC = () => {
                 </p>
               </div>
             </div>
+
+            <div>
+              <p>Result stats</p>
+              <p>{`hp - ${hpStatResult}`}</p>
+              <p>{`a - ${aStatResult}`}</p>
+              <p>{`d - ${dStatResult}`}</p>
+              <p>{`s - ${sStatResult}`}</p>
+              <p>{`sa -  ${saStatResult}`}</p>
+              <p>{`sd - ${sdStatResult}`}</p>
+            </div>
+          </div>
+
+          <div
+            style={{
+              display: 'flex',
+              height: '20px',
+              gap: '10px',
+              margin: '20px 0',
+            }}
+          >
+            <p style={{ margin: '0', color: 'red' }}>Character</p>
+            <input />
+
+            <p style={{ margin: '0' }}>Level</p>
+            <input
+              style={{ width: '50px' }}
+              name='pokeLevel'
+              type='number'
+              value={pokeLevel}
+              onChange={onLevelChange}
+              min={0}
+              max={100}
+              step={1}
+            />
+
+            <p style={{ margin: '0', color: 'red' }}>Training</p>
+            <input />
           </div>
 
           <div
@@ -315,13 +385,14 @@ export const ContainerInfo: React.FC = () => {
             {!isGenCorrect && <p>Enter correct gen</p>}
             <button
               type='button'
-              onClick={() =>
+              onClick={() => {
                 tempGenecodeOfPokemon &&
-                setGenecodeOfPokemon(tempGenecodeOfPokemon)
-              }
+                  setGenecodeOfPokemon(tempGenecodeOfPokemon);
+              }}
             >
               Enter
             </button>
+            <button onClick={() => countResultStats()}>See result stats</button>
             <button
               type='button'
               onClick={() => {
@@ -332,6 +403,8 @@ export const ContainerInfo: React.FC = () => {
                 setEvS(0);
                 setEvSa(0);
                 setEvSd(0);
+                countResultStats();
+                setPokeLevel(1);
               }}
             >
               Clear All Stats
