@@ -367,7 +367,7 @@ export const ContainerInfo: React.FC = () => {
             }}
           >
             <p style={{ margin: '0', color: 'red' }}>Character</p>
-            <input />
+            <input disabled />
 
             <p style={{ margin: '0' }}>Level</p>
             <input
@@ -382,7 +382,7 @@ export const ContainerInfo: React.FC = () => {
             />
 
             <p style={{ margin: '0', color: 'red' }}>Training</p>
-            <input />
+            <input disabled />
           </div>
 
           <div
