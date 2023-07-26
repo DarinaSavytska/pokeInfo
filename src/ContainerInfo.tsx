@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { getPokemonByNumber } from './api';
 
 export const ContainerInfo: React.FC = () => {
@@ -114,11 +114,31 @@ export const ContainerInfo: React.FC = () => {
       10 +
       Number(pokeLevel);
 
-    const aStat = ((pokemon.stats[1].base_stat * 2 + genA + evA / 2) * pokeLevel / 100 + 5) * char * train; 
-    const dStat = ((pokemon.stats[2].base_stat * 2 + genD + evD / 2) * pokeLevel / 100 + 5) * char * train; 
-    const sStat = ((pokemon.stats[5].base_stat * 2 + genS + evS / 2) * pokeLevel / 100 + 5) * char * train; 
-    const saStat = ((pokemon.stats[3].base_stat * 2 + genSA + evSa / 2) * pokeLevel / 100 + 5) * char * train; 
-    const sdStat = ((pokemon.stats[4].base_stat * 2 + genSD + evSd / 2) * pokeLevel / 100 + 5) * char * train; 
+    const aStat =
+      (((pokemon.stats[1].base_stat * 2 + genA + evA / 2) * pokeLevel) / 100 +
+        5) *
+      char *
+      train;
+    const dStat =
+      (((pokemon.stats[2].base_stat * 2 + genD + evD / 2) * pokeLevel) / 100 +
+        5) *
+      char *
+      train;
+    const sStat =
+      (((pokemon.stats[5].base_stat * 2 + genS + evS / 2) * pokeLevel) / 100 +
+        5) *
+      char *
+      train;
+    const saStat =
+      (((pokemon.stats[3].base_stat * 2 + genSA + evSa / 2) * pokeLevel) / 100 +
+        5) *
+      char *
+      train;
+    const sdStat =
+      (((pokemon.stats[4].base_stat * 2 + genSD + evSd / 2) * pokeLevel) / 100 +
+        5) *
+      char *
+      train;
 
     seHpStatResult(Math.round(hpStat));
     seAStatResult(Math.round(aStat));
@@ -130,7 +150,7 @@ export const ContainerInfo: React.FC = () => {
 
   return (
     <div>
-      <p>Test info. Don't work with Neophytes</p>
+      <p>Test info. Doesn't work with Neophytes</p>
 
       <div style={{ display: 'flex', height: '150px' }}>
         <div>
@@ -374,14 +394,14 @@ export const ContainerInfo: React.FC = () => {
             }}
           >
             <p>Enter genecode</p>
-            <input
-              style={{ width: '180px' }}
-              name='pokeGenecode'
-              type='string'
-              value={tempGenecodeOfPokemon}
-              onChange={onCountGenecode}
-              placeholder='h0a0d0s0sa0sd0.100'
-            />
+              <input
+                style={{ width: '180px' }}
+                name='pokeGenecode'
+                type='string'
+                value={tempGenecodeOfPokemon}
+                onChange={onCountGenecode}
+                placeholder='h0a0d0s0sa0sd0.100'
+              />
             {!isGenCorrect && <p>Enter correct gen</p>}
             <button
               type='button'
@@ -410,6 +430,7 @@ export const ContainerInfo: React.FC = () => {
               Clear All Stats
             </button>
           </div>
+          <p>For gen you can copy this: h0a0d0s0sa0sd0</p>
         </>
       )}
     </div>
