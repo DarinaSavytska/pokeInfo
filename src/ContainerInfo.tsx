@@ -11,6 +11,8 @@ export const ContainerInfo: React.FC = () => {
   const [tempGenecodeOfPokemon, setTempGenecodeOfPokemon] = useState<string>();
   const [genecodeOfPokemon, setGenecodeOfPokemon] = useState<string>();
 
+  const [isGenCorrect, setIsGenCorrect] = useState<boolean>(true);
+
   const getPokemon = async (number: number) => {
     const pokemonFromAPI = await getPokemonByNumber(number);
 
@@ -20,8 +22,6 @@ export const ContainerInfo: React.FC = () => {
 
     console.log(pokemonFromAPI);
   };
-
-  const [isGenCorrect, setIsGenCorrect] = useState<boolean>(true);
 
   const onCountGenecode = (e: any) => {
     if (
@@ -148,7 +148,16 @@ export const ContainerInfo: React.FC = () => {
     seSdStatResult(Math.round(sdStat));
   };
 
-  return (
+  const [autarization, setAutarization] = useState(false);
+  const [password, setPassword] = useState('');
+
+  const onChangePassword = (e: any) => {
+    setPassword(e.target.value);
+  };
+
+  const [showError, setShowError] = useState(false);
+
+  return autarization ? (
     <div>
       <p>Test info. Doesn't work with Neophytes</p>
 
@@ -381,8 +390,8 @@ export const ContainerInfo: React.FC = () => {
               step={1}
             />
 
-            <p style={{ margin: '0', color: 'red' }}>Training</p>
-            <input disabled />
+            {/* <p style={{ margin: '0', color: 'red' }}>Training</p>
+            <input disabled /> */}
           </div>
 
           <div
@@ -394,14 +403,14 @@ export const ContainerInfo: React.FC = () => {
             }}
           >
             <p>Enter genecode</p>
-              <input
-                style={{ width: '180px' }}
-                name='pokeGenecode'
-                type='string'
-                value={tempGenecodeOfPokemon}
-                onChange={onCountGenecode}
-                placeholder='h0a0d0s0sa0sd0.100'
-              />
+            <input
+              style={{ width: '180px' }}
+              name='pokeGenecode'
+              type='string'
+              value={tempGenecodeOfPokemon}
+              onChange={onCountGenecode}
+              placeholder='h0a0d0s0sa0sd0.100'
+            />
             {!isGenCorrect && <p>Enter correct gen</p>}
             <button
               type='button'
@@ -433,6 +442,28 @@ export const ContainerInfo: React.FC = () => {
           <p>For gen you can copy this: h0a0d0s0sa0sd0</p>
         </>
       )}
+    </div>
+  ) : (
+    <div>
+      <p>Enter password</p>
+      <div>
+        {showError && <p style={{ color: 'red' }}>Not correct password</p>}
+        <input
+          name='password'
+          type='password'
+          value={password}
+          onChange={onChangePassword}
+        />
+      </div>
+      <button
+        onClick={() => {
+          setAutarization(password === 'smart');
+          setShowError(password !== 'smart');
+        }}
+        type='submit'
+      >
+        Enter
+      </button>
     </div>
   );
 };
