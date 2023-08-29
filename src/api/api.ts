@@ -7,3 +7,4 @@ export async function getPokemonByNumber(id: number) {
 
   return pokeAPI;
 }
+

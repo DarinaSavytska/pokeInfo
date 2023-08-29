@@ -1,18 +1,21 @@
 {
-  "name": "leagueinfo",
-  "version": "0.2.3",
+  "name": "pokeinfo",
+  "version": "0.3.0",
   "private": true,
-  "homepage": "https://DarinaSavytska.github.io/leagueInfo/",
+  "homepage": "https://DarinaSavytska.github.io/pokeInfo/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "bulma": "^0.9.4",
+    "eslint": "^8.2.0",
     "gh-pages": "^5.0.0",
     "node-sass": "^8.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-router-dom": "^6.15.0",
     "react-scripts": "5.0.1",
+    "styled-components": "^6.0.7",
     "typescript": "^4.9.5",
     "web-vitals": "^2.1.4"
   },
@@ -41,5 +44,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@babel/eslint-parser": "^7.22.11"
   }
 }

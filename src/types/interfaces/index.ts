@@ -1,1 +1,1 @@
-export * from './ILocalization';
+export * from './IPokemon';
