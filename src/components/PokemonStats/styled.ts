@@ -6,6 +6,7 @@ export const AllStatsContainer = styled.div`
 
   @media (max-width: 640px) {
     flex-direction: column;
+    width: 150px;
   }
 `;
 

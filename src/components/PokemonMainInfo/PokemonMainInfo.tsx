@@ -17,7 +17,7 @@ interface IPokemonMainInfo {
 export const PokemonMainInfo: React.FC<IPokemonMainInfo> = ({ getPokemon, pokemon }) => {
   const loc = useContext(LocalizationContext);
 
-  const [pokeNumberForSearch, setPokeNumberForSearch] = useState<number>(1);
+  const [pokeNumberForSearch, setPokeNumberForSearch] = useState<number>(pokemon?.id || 1);
   const pokemonName = pokemon?.forms[0].name;
 
   const onChangePokeNumber = (e: any) => {

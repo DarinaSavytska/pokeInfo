@@ -15,4 +15,7 @@ export interface ILoc {
   LEVEL: string;
   SEE_THE_RESULT: string;
   CLEAR_ALL_STATS: string;
+  MAIN_PAGE: string;
+  MOVES: string;
+  TEMP_INFO: string;
 }

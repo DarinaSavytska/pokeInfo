@@ -16,5 +16,8 @@ export const uaLoc: ILoc = {
   CHARACTER: 'Характер',
   LEVEL: 'Рівень',
   SEE_THE_RESULT: 'Побачити результат',
-  CLEAR_ALL_STATS: 'Очистити всі стати'
+  CLEAR_ALL_STATS: 'Очистити всі стати',
+  MAIN_PAGE: 'Головна сторінка',
+  MOVES: 'Атаки',
+  TEMP_INFO: 'Тут будуть атаки для покемону',
 };

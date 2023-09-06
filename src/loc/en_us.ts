@@ -17,4 +17,7 @@ export const engLoc: ILoc = {
   LEVEL: 'Level',
   SEE_THE_RESULT: 'See the result',
   CLEAR_ALL_STATS: 'Clear all stats',
+  MAIN_PAGE: 'Main page',
+  MOVES: 'Moves',
+  TEMP_INFO: 'There will be attacks for pokemon',
 };

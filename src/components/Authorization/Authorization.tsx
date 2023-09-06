@@ -33,13 +33,16 @@ export const Authorization: React.FC<IAuthorization> = ({ setAuthorization }) =>
       <S.Title>{loc.ENTER_PASSWORD}</S.Title>
       <S.PasswordField>
         {showError && <S.Error onClick={e => e.stopPropagation()}>{loc.INCORRECT_PASSWORD}</S.Error>}
-        <Input
-          name='password'
-          type='password'
-          value={password}
-          onChange={onChangePassword}
-          onKeyDown={e => e.key === 'Enter' && onSubmit()}
-        />
+        <form>
+          <Input
+            name='password'
+            type='password'
+            autoComplete='off'
+            value={password}
+            onChange={onChangePassword}
+            onKeyDown={e => e.key === 'Enter' && onSubmit()}
+          />
+        </form>
       </S.PasswordField>
       <Button onClick={onSubmit} type={ButtonType.Submit}>
         {loc.ENTER}

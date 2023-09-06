@@ -1,8 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { getPokemonByNumber } from '../api';
 // components
 import { Input } from './Input';
-import { Authorization, Button, PokemonMainInfo } from '../components';
+import { Button, PokemonMainInfo } from '../components';
 import { PokemonStats } from './PokemonStats/PokemonStats';
 // styles
 import * as S from './styled';
@@ -11,16 +10,13 @@ import { IPokemon } from '../types';
 import { LocalizationContext } from '../constants';
 import { ButtonType } from './Button/types';
 
-export const ContainerInfo: React.FC = () => {
+interface IContainerInfo {
+  pokemon: IPokemon;
+  getPokemon: (number: number) => Promise<void>;
+}
+
+export const ContainerInfo: React.FC<IContainerInfo> = ({ pokemon, getPokemon }) => {
   const loc = useContext(LocalizationContext);
-  const getPokemon = async (number: number) => {
-    const pokemonFromAPI = await getPokemonByNumber(number);
-
-    setPokemon(pokemonFromAPI);
-  };
-
-  const [authorization, setAuthorization] = useState(false);
-  const [pokemon, setPokemon] = useState<IPokemon | null>();
 
   // Effort values
   const [effortValueHP, setEffortValueHP] = useState<number>(0);
@@ -117,10 +113,10 @@ export const ContainerInfo: React.FC = () => {
     resetResult();
   }, [pokemon]);
 
-  return authorization ? (
+  return (
     <S.Container>
       <S.MainInfo>{loc.MAIN_INFO}</S.MainInfo>
-      <PokemonMainInfo getPokemon={getPokemon} pokemon={pokemon as IPokemon} />
+      <PokemonMainInfo getPokemon={getPokemon} pokemon={pokemon} />
 
       {pokemon && (
         <>
@@ -163,8 +159,6 @@ export const ContainerInfo: React.FC = () => {
         </>
       )}
     </S.Container>
-  ) : (
-    <Authorization setAuthorization={setAuthorization} />
   );
 };
 
