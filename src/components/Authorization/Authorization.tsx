@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 // components
 import { Button } from '../Button';
+import { Input } from '../Input';
 // styles
 import * as S from './styled';
 // other
@@ -18,29 +19,29 @@ export const Authorization: React.FC<IAuthorization> = ({ setAuthorization }) =>
   const [showError, setShowError] = useState(false);
 
   const onChangePassword = (e: any) => {
+    setShowError(false);
     setPassword(e.target.value);
+  };
+
+  const onSubmit = () => {
+    setAuthorization(password === 'smart');
+    setShowError(password !== 'smart');
   };
 
   return (
     <S.AuthorizationContainer>
       <S.Title>{loc.ENTER_PASSWORD}</S.Title>
       <S.PasswordField>
-        {showError && <S.Error>{loc.INCORRECT_PASSWORD}</S.Error>}
-        <input
+        {showError && <S.Error onClick={e => e.stopPropagation()}>{loc.INCORRECT_PASSWORD}</S.Error>}
+        <Input
           name='password'
           type='password'
           value={password}
           onChange={onChangePassword}
-          onClick={() => setShowError(false)}
+          onKeyDown={e => e.key === 'Enter' && onSubmit()}
         />
       </S.PasswordField>
-      <Button
-        onClick={() => {
-          setAuthorization(password === 'smart');
-          setShowError(password !== 'smart');
-        }}
-        type={ButtonType.Submit}
-      >
+      <Button onClick={onSubmit} type={ButtonType.Submit}>
         {loc.ENTER}
       </Button>
     </S.AuthorizationContainer>

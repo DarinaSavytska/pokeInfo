@@ -1,8 +1,13 @@
 import React, { useContext, useState } from 'react';
-import { LocalizationContext } from '../../constants';
+// components
+import { Input } from '../Input';
+import { Button } from '../Button';
+// styles
+import * as S from './styled';
+// other
 import { IPokemon } from '../../types';
-import { Button} from '../Button';
 import { ButtonType } from '../Button/types';
+import { LocalizationContext } from '../../constants';
 
 interface IPokemonMainInfo {
   getPokemon: (num: number) => void;
@@ -16,21 +21,22 @@ export const PokemonMainInfo: React.FC<IPokemonMainInfo> = ({ getPokemon, pokemo
   const pokemonName = pokemon?.forms[0].name;
 
   const onChangePokeNumber = (e: any) => {
-    const num = (e.target.value > 1008 && 1008) || (e.target.value < 0 && 0) || e.target.value;
+    const num = (e.target.value > 1008 && 1008) || (e.target.value < 0 && 0) || Number(e.target.value);
 
     setPokeNumberForSearch(num);
   };
 
   return (
-    <div style={{ display: 'flex', height: '150px' }}>
-      <div>
-        <p>{loc.SELECT_NUMBER_OF_POKEMON}</p>
-        <div style={{ display: 'flex', gap: '10px', flexDirection: 'column' }}>
-          <input
+    <S.Container>
+      <S.ControleContainer>
+        <S.ControlInfo>{loc.SELECT_NUMBER_OF_POKEMON}</S.ControlInfo>
+        <S.ControleElements>
+          <Input
             name='pokeNumber'
             type='number'
-            value={pokeNumberForSearch}
+            value={parseInt(pokeNumberForSearch.toString(), 10).toString()}
             onChange={onChangePokeNumber}
+            onKeyDown={e => e.key === 'Enter' && getPokemon(pokeNumberForSearch)}
             min={0}
             max={1008}
             step={1}
@@ -38,39 +44,29 @@ export const PokemonMainInfo: React.FC<IPokemonMainInfo> = ({ getPokemon, pokemo
           <Button onClick={() => getPokemon(pokeNumberForSearch)} type={ButtonType.Submit}>
             {loc.LOAD_POKEMON}
           </Button>
-        </div>
-      </div>
+        </S.ControleElements>
+      </S.ControleContainer>
 
-      <div style={{ marginLeft: '30px' }}>
-        <p>{pokemonName ? `Pokemon #${pokemon.id} is ${pokemonName}` : 'Choose pokemon'}</p>
+      <S.PokemonContainer>
+        <S.PokemonName>
+          {pokemonName && `${loc.POKEMON_NUM + pokemon.id} ${loc.IS} ${pokemonName}`}
+        </S.PokemonName>
 
-        <div style={{ display: 'flex', flexDirection: 'row' }}>
+        <S.PokemonImgContainer>
           {pokemon && (
-            <div
-              style={{
-                display: 'flex',
-                marginLeft: '10px',
-                alignItems: 'center',
-              }}
-            >
+            <S.PokemonImg>
               <p>{pokemon?.sprites?.front_female ? '♂' : '♂/♀'}</p>
               <img alt='Pokemon sprite' src={pokemon.sprites.front_default} />
-            </div>
+            </S.PokemonImg>
           )}
           {pokemon?.sprites?.front_female && (
-            <div
-              style={{
-                display: 'flex',
-                marginLeft: '10px',
-                alignItems: 'center',
-              }}
-            >
+            <S.PokemonImg>
               <p>♀</p>
-              <img alt='Pokemon sprite' src={pokemon.sprites.front_female} />
-            </div>
+              <img alt='Pokemon sprite female' src={pokemon.sprites.front_female} />
+            </S.PokemonImg>
           )}
-        </div>
-      </div>
-    </div>
+        </S.PokemonImgContainer>
+      </S.PokemonContainer>
+    </S.Container>
   );
 };

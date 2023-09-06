@@ -1,10 +1,11 @@
 import React, { ButtonHTMLAttributes } from 'react';
-import * as S from './styles';
+// styles
+import * as S from './styled';
+// other
 import { ButtonType } from './types';
 
 export interface IButton extends ButtonHTMLAttributes<HTMLButtonElement> {
   type: ButtonType;
-  onClick: () => void;
 }
 
 export const Button: React.FC<IButton> = ({ children, ...props }) => (

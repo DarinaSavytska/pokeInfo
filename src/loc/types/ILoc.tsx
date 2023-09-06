@@ -9,4 +9,10 @@ export interface ILoc {
   GENCODE: string;
   RESULT_STATS: string;
   MAIN_INFO: string;
-};
+  POKEMON_NUM: string;
+  IS: string;
+  CHARACTER: string;
+  LEVEL: string;
+  SEE_THE_RESULT: string;
+  CLEAR_ALL_STATS: string;
+}

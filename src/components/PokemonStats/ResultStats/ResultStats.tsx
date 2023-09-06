@@ -1,6 +1,9 @@
 import React, { useContext } from 'react';
-import { LocalizationContext } from '../../../constants';
+// styles
+import * as S from '../styled';
+// other
 import { PokeStats } from '../../../types';
+import { LocalizationContext } from '../../../constants';
 
 export interface IResultStats {
   resultStats: number[];
@@ -10,15 +13,17 @@ export const ResultStats: React.FC<IResultStats> = ({ resultStats }) => {
   const loc = useContext(LocalizationContext);
 
   const stats = resultStats.map((stat, idx) => (
-    <p key={Math.random()}>
-      {PokeStats[idx]} is {stat}
-    </p>
+    <S.Stat key={Math.random()}>
+      <div>{PokeStats[idx]}</div>
+      <div> - </div>
+      <div>{stat}</div>
+    </S.Stat>
   ));
 
   return (
-    <div>
-      <p>{loc.RESULT_STATS}</p>
-      {stats}
-    </div>
+    <S.StatsContainer>
+      <S.StatsTitle>{loc.RESULT_STATS}</S.StatsTitle>
+      <S.Stats>{stats}</S.Stats>
+    </S.StatsContainer>
   );
 };

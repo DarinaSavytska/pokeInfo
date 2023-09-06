@@ -10,5 +10,11 @@ export const engLoc: ILoc = {
   EV: 'Effort values',
   GENCODE: 'Gencode',
   RESULT_STATS: 'Result stats',
-  MAIN_INFO: 'Doesn’t work with Neophytes',
+  MAIN_INFO: 'Stat calculator',
+  POKEMON_NUM: 'Pokemon #',
+  IS: 'is',
+  CHARACTER: 'Character',
+  LEVEL: 'Level',
+  SEE_THE_RESULT: 'See the result',
+  CLEAR_ALL_STATS: 'Clear all stats',
 };

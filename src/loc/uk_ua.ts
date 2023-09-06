@@ -10,5 +10,11 @@ export const uaLoc: ILoc = {
   EV: 'Значення посилення',
   GENCODE: 'Генокод',
   RESULT_STATS: 'Підсумкові стати',
-  MAIN_INFO: 'Не працює з неофітами'
+  MAIN_INFO: 'Калькулятор статів',
+  POKEMON_NUM: 'Покемон #',
+  IS: 'це',
+  CHARACTER: 'Характер',
+  LEVEL: 'Рівень',
+  SEE_THE_RESULT: 'Побачити результат',
+  CLEAR_ALL_STATS: 'Очистити всі стати'
 };

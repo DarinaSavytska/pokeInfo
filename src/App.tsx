@@ -1,26 +1,29 @@
 import React, { useState } from 'react';
+// components
 import ContainerInfo from './components/ContainerInfo';
-import { ILoc } from 'loc/types/ILoc';
-import { engLoc } from 'loc/en_us';
-import { uaLoc } from 'loc/uk_ua';
-import { LocalizationContext } from 'constants/contexts';
-import { Button } from 'components/Button/Button';
-import { ButtonType } from 'components/Button/types/enums/ButtonType';
+// styles
+import * as S from './styled';
+// other
+import { ILoc, engLoc, uaLoc } from './loc';
+import { LocalizationContext } from './constants';
+import { UAflagSVG, UKflagSVG } from './assets';
 
-const App: React.FC = () => {
+export const App: React.FC = () => {
   const [loc, setLoc] = useState<ILoc>(engLoc);
 
   return (
     <LocalizationContext.Provider value={loc}>
-      <Button type={ButtonType.Button} onClick={() => setLoc(engLoc)}>
-        eng
-      </Button>
-      <Button type={ButtonType.Button} onClick={() => setLoc(uaLoc)}>
-        ua
-      </Button>
-      <ContainerInfo />
+      <S.Container>
+        <ContainerInfo />
+        <div>
+          <S.Flag onClick={() => setLoc(engLoc)}>
+            <UKflagSVG />
+          </S.Flag>
+          <S.Flag onClick={() => setLoc(uaLoc)}>
+            <UAflagSVG />
+          </S.Flag>
+        </div>
+      </S.Container>
     </LocalizationContext.Provider>
   );
 };
-
-export default App;

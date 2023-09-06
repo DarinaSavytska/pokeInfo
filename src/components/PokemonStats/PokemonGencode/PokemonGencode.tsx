@@ -1,20 +1,18 @@
 import React, { useContext } from 'react';
+// components
+import { Input } from '../../Input';
+// styles
+import * as S from '../styled';
+// other
 import { LocalizationContext } from '../../../constants';
 import { PokeStats } from '../../../types';
 
 export interface IPokemonGencode {
   gencode: number[];
   setGencode: ((gen: number) => void)[];
-  aditionalGen: any;
-  inputView: boolean;
 }
 
-export const PokemonGencode: React.FC<IPokemonGencode> = ({
-  gencode,
-  setGencode,
-  aditionalGen,
-  inputView,
-}) => {
+export const PokemonGencode: React.FC<IPokemonGencode> = ({ gencode, setGencode }) => {
   const loc = useContext(LocalizationContext);
 
   const onGenChange = (gen: string, e: any) => {
@@ -26,22 +24,20 @@ export const PokemonGencode: React.FC<IPokemonGencode> = ({
   };
 
   const pokemonGen = gencode.map((gen: number, idx) => (
-    <p key={PokeStats[idx]}>
+    <S.Stat key={PokeStats[idx]}>
       {PokeStats[idx]}
-      <input type='number' onChange={e => onGenChange(PokeStats[idx], e)} value={gen} />
-    </p>
-  ));
-
-  const view = aditionalGen.map((gen: number, idx: number) => (
-    <p>
-      {PokeStats[idx]} - {gen}
-    </p>
+      <Input
+        type='number'
+        onChange={e => onGenChange(PokeStats[idx], e)}
+        value={parseInt(gen.toString(), 10).toString()}
+      />
+    </S.Stat>
   ));
 
   return (
-    <div>
-      <p style={{ backgroundColor: 'yellowgreen' }}>{loc.GENCODE}</p>
-      {inputView ? view : pokemonGen}
-    </div>
+    <S.StatsContainer>
+      <S.StatsTitle>{loc.GENCODE}</S.StatsTitle>
+      <S.Stats>{pokemonGen}</S.Stats>
+    </S.StatsContainer>
   );
 };
