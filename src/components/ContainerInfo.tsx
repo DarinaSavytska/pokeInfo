@@ -94,6 +94,7 @@ export const ContainerInfo: React.FC<IContainerInfo> = ({ pokemon, getPokemon })
     gencode.map((_, idx) => setGencode[idx](0));
 
     setPokeLevel(1);
+    resetResult();
   };
 
   // Level
