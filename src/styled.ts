@@ -20,6 +20,12 @@ export const Navigation = styled.div`
 
 export const StyledLink = styled(Link)`
   text-decoration: none;
+  color: black;
+  font-weight: 600;
+
+  &:hover {
+    color: crimson;
+  }
 `;
 
 export const FlagContainer = styled.div`

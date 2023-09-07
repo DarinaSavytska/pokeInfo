@@ -30,15 +30,15 @@ export const App: React.FC = () => {
           {authorization ? (
             <S.NavigationContainer>
               <S.Navigation>
-                <S.StyledLink to='/'>{loc.MAIN_PAGE}</S.StyledLink>
-                <S.StyledLink to='/moves'>{loc.MOVES}</S.StyledLink>
+                <S.StyledLink to='pokeInfo/'>{loc.MAIN_PAGE}</S.StyledLink>
+                <S.StyledLink to='pokeInfo/moves'>{loc.MOVES}</S.StyledLink>
               </S.Navigation>
               <Routes>
                 <Route
-                  path='/'
+                  path='pokeInfo/'
                   element={<ContainerInfo pokemon={pokemon as IPokemon} getPokemon={getPokemon} />}
                 />
-                <Route path='/moves' element={<Moves pokemon={pokemon as IPokemon} />} />
+                <Route path='pokeInfo/moves' element={<Moves pokemon={pokemon as IPokemon} />} />
               </Routes>
             </S.NavigationContainer>
           ) : (
