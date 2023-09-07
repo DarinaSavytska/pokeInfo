@@ -23,6 +23,8 @@ export const App: React.FC = () => {
     setPokemon(pokemonFromAPI);
   };
 
+  // подключить Private Routes
+
   return (
     <LocalizationContext.Provider value={loc}>
       <S.Container>

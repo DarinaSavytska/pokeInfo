@@ -100,10 +100,11 @@ export const ContainerInfo: React.FC<IContainerInfo> = ({ pokemon, getPokemon })
   // Level
   const [pokeLevel, setPokeLevel] = useState<number>(1);
 
-  const onLevelChange = (e: any) =>
-    (e.target.value > 100 && 100) ||
-    (e.target.value < 0 && setPokeLevel(0)) ||
-    setPokeLevel(Number(e.target.value));
+  const onLevelChange = (e: any) => {
+    const newLvl = (e.target.value > 100 && 100) || (e.target.value < 0 && 0) || Number(e.target.value);
+
+    return setPokeLevel(newLvl);
+  };
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
