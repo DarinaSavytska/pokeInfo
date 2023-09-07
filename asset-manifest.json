@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.js": "/pokeInfo/static/js/main.32a1f52e.js",
+    "main.js": "/pokeInfo/static/js/main.ee1e6442.js",
     "index.html": "/pokeInfo/index.html",
-    "main.32a1f52e.js.map": "/pokeInfo/static/js/main.32a1f52e.js.map"
+    "main.ee1e6442.js.map": "/pokeInfo/static/js/main.ee1e6442.js.map"
   },
   "entrypoints": [
-    "static/js/main.32a1f52e.js"
+    "static/js/main.ee1e6442.js"
   ]
 }
